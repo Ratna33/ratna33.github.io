@@ -29,4 +29,10 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+      run: echo "Hello ${{ inputs.name }}" >> out.txt
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: testOutput
+        path: out.txt
+        retention-days: 1  
